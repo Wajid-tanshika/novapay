@@ -20,12 +20,13 @@ jobs:
           java-version: '17'
 
       - name: Decode keystore
-        run: echo "${{ secrets.KEYSTORE_BASE64 }}" | base64 -d > my-upload-key.jks
-
-      - name: Debug secret lengths
+        run: echo "${{ secrets.KEYSTORE_BASE64 }}" | base64 -d > my-upload-key.jks- name: Debug secret match
         run: |
-          echo "STORE_PASSWORD length: $(echo -n "${{ secrets.STORE_PASSWORD }}" | wc -c)"
-          echo "KEY_PASSWORD length: $(echo -n "${{ secrets.KEY_PASSWORD }}" | wc -c)"
+          if [ "${{ secrets.STORE_PASSWORD }}" = "${{ secrets.KEY_PASSWORD }}" ]; then
+            echo "PASSWORDS MATCH"
+          else
+            echo "PASSWORDS DO NOT MATCH"
+          fi
 
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v4
