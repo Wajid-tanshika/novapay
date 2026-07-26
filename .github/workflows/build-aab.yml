@@ -35,12 +35,15 @@ jobs:
         with:
           gradle-version: current
 
+      - name: Verify keystore file
+        run: ls -la my-upload-key.jks
+
       - name: Build Release AAB
         env:
           KEYSTORE_PATH: ${{ github.workspace }}/my-upload-key.jks
           STORE_PASSWORD: ${{ secrets.STORE_PASSWORD }}
           KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
-        run: gradle bundleRelease
+        run: gradle bundleRelease --no-daemon --stacktrace
 
       - name: Upload AAB artifact
         uses: actions/upload-artifact@v4
