@@ -1,0 +1,6 @@
+{
+  "name": "NovaPay",
+  "description": "NovaPay is a modern, secure fintech mobile wallet prototype with local Room database persistence, QR payments, KYC verification, and an Admin dashboard.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
